@@ -37,12 +37,16 @@ public class RegisterCompanyFacadeImpl implements RegisterCompanyFacade {
 
 	@Override
 	public ResponseEntity<Object> setRegCompany(RegisterCompanyRequest regCompanyReq) throws SQLException {
+		Role roles = new Role();
 
 		if (regCompanyReq.getTransactionType().equalsIgnoreCase("save")) {
 			RegisterCompany registerCompany = regCompanyReq.getRegisterCompany();
-			Role findByRole = roleRepo.findByRole("SUPERADMIN");
+			roles = roleRepo.findByRole("COMPANY_ADMIN");
+//			roles = roleRepo.findByRole("SUPER_ADMIN");
+//			roles = roleRepo.findByRole("COMPANY_USER");
+//			roles = roleRepo.findByRole("DISTRIBUTOR");
 			String pwd = passwordEncoder.encode(registerCompany.getPassword());
-			registerCompany.setRoles(new HashSet<>(Arrays.asList(findByRole)));
+			registerCompany.setRoles(new HashSet<>(Arrays.asList(roles)));
 			registerCompany.setPassword(pwd);
 			registerCompany.setFlag(true);
 			registerCompany.setCreatedDate(new Date());
@@ -54,6 +58,7 @@ public class RegisterCompanyFacadeImpl implements RegisterCompanyFacade {
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			}
 		}
+
 		response.setMessage(FAILED);
 		response.setStatusCode("409");
 		return new ResponseEntity<>(response, HttpStatus.CONFLICT);
@@ -63,5 +68,4 @@ public class RegisterCompanyFacadeImpl implements RegisterCompanyFacade {
 	public ResponseEntity<Object> getRegCompany(RegisterCompanyRequest regCompanyReq) throws SQLException {
 		return null;
 	}
-
 }

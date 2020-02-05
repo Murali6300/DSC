@@ -28,7 +28,7 @@ public class RoleFacadeImpl implements RoleFacade {
 
 			Role role = regCompanyReq.getRole();
 			Role save = roleRepo.save(role);
-			if (save.getRole_id() != null) {
+			if (save.getRole() != null) {
 				response.setStatusCode("200");
 				response.setMessage("Role saved success!");
 				return new ResponseEntity<>(response, HttpStatus.OK);

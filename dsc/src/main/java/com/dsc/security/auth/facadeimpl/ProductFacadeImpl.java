@@ -1,8 +1,5 @@
 package com.dsc.security.auth.facadeimpl;
 
-import static com.dsc.security.auth.constants.CompanyConstants.FAILED;
-import static com.dsc.security.auth.constants.CompanyConstants.SUCCESS;
-
 import java.sql.SQLException;
 import java.util.Date;
 
@@ -13,23 +10,26 @@ import org.springframework.stereotype.Service;
 
 import com.dsc.security.auth.facade.ProductFacde;
 import com.dsc.security.auth.model.Product;
-import com.dsc.security.auth.model.RegisterCompany;
 import com.dsc.security.auth.repositories.ProductRepository;
 import com.dsc.security.auth.request.RegisterCompanyRequest;
 import com.dsc.security.auth.response.RegisterCompanyResponse;
 
 @Service
 public class ProductFacadeImpl implements ProductFacde {
-	
+
 	@Autowired
 	private ProductRepository productRepo;
-	
+
 	RegisterCompanyResponse response = new RegisterCompanyResponse();
 
 	@Override
 	public ResponseEntity<Object> setProduct(RegisterCompanyRequest regCompanyReq) throws SQLException {
 
-		if (regCompanyReq.getTransactionType().equalsIgnoreCase("save")) {
+		if (regCompanyReq.getTransactionType().equalsIgnoreCase("save")
+//				&& regCompanyReq.getRole().getRole().equalsIgnoreCase("COMPANY_ADMIN")
+//				|| regCompanyReq.getRole().getRole().equalsIgnoreCase("COMPANY_USER")
+				
+				) {
 			Product product = regCompanyReq.getProduct();
 			product.setFlag(true);
 			product.setCreatedDate(new Date());

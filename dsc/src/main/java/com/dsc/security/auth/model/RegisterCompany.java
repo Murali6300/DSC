@@ -12,7 +12,6 @@ public class RegisterCompany {
 
 	@Id
 	private String id;
-//	@Indexed(unique = true)
 //	@Indexed(unique = true, direction = IndexDirection.DESCENDING)
 	private String email;
 	private String companyFullName;

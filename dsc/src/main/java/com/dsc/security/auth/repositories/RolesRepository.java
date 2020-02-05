@@ -8,4 +8,6 @@ public interface RolesRepository extends MongoRepository<Role, String> {
 
 	Role findByRole(String role);
 
+//	Role findAll(String role);
+
 }

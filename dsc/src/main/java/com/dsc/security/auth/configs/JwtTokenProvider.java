@@ -30,6 +30,7 @@ public class JwtTokenProvider {
 	private String secretKey = "secret";
 
 	@Value("${security.jwt.token.expire-length:3600000}") // 1h
+//	@Value("${security.jwt.token.expire-length:#{24*60*60}}") // 24h
 	private long validityInMilliSec;
 
 	@Autowired
@@ -80,8 +81,9 @@ public class JwtTokenProvider {
 			}
 			return true;
 		} catch (JwtException | IllegalArgumentException e) {
-
+			e.printStackTrace();
 			throw new JwtException("Expired or invalid JWT token!");
+
 		}
 
 	}

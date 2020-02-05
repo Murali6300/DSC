@@ -36,9 +36,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
 		RegisterCompany findByEmail = regComRepo.findByEmail(email);
+		
+//		List<Role> userRoles = roleRepo.findAll();
+//		userRoles.forEach(System.out::println);
 
 		if (findByEmail != null) {
 			List<GrantedAuthority> authorities = getUserAuthority(findByEmail.getRoles());
+//			List<GrantedAuthority> authorities = getUserAuthority((Set<Role>) findAll);
+			System.out.println("Authorities " + authorities);
 			return getUserForDetails(findByEmail, authorities);
 
 		} else {
@@ -54,6 +59,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		});
 
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles);
+		System.out.println("GrantedAuth" + grantedAuthorities);
 		return grantedAuthorities;
 	}
 

@@ -1,5 +1,7 @@
 package com.dsc.security.auth.request;
 
+import com.dsc.security.auth.model.CompanyUserDetails;
+import com.dsc.security.auth.model.DistributorDetails;
 import com.dsc.security.auth.model.Product;
 import com.dsc.security.auth.model.RegisterCompany;
 import com.dsc.security.auth.model.Role;
@@ -9,8 +11,26 @@ public class RegisterCompanyRequest {
 	private RegisterCompany registerCompany;
 	private Role role;
 	private Product product;
+	private CompanyUserDetails companyUserDetails;
+	private DistributorDetails distributorDetails;
 
 	private String transactionType;
+
+	public DistributorDetails getDistributorDetails() {
+		return distributorDetails;
+	}
+
+	public void setDistributorDetails(DistributorDetails distributorDetails) {
+		this.distributorDetails = distributorDetails;
+	}
+
+	public CompanyUserDetails getCompanyUserDetails() {
+		return companyUserDetails;
+	}
+
+	public void setCompanyUserDetails(CompanyUserDetails companyUserDetails) {
+		this.companyUserDetails = companyUserDetails;
+	}
 
 	public RegisterCompany getRegisterCompany() {
 		return registerCompany;
@@ -47,6 +67,7 @@ public class RegisterCompanyRequest {
 	@Override
 	public String toString() {
 		return "RegisterCompanyRequest [registerCompany=" + registerCompany + ", role=" + role + ", product=" + product
+				+ ", companyUserDetails=" + companyUserDetails + ", distributorDetails=" + distributorDetails
 				+ ", transactionType=" + transactionType + "]";
 	}
 
